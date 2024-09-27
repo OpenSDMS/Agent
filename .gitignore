@@ -1,0 +1,60 @@
+# 기본적인 Visual Studio 관련 파일 및 폴더 무시
+.vscode/
+.vs/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.userprefs
+
+# 빌드 결과물 무시
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+
+# 패키지 관련 무시
+*.nupkg
+*.snupkg
+*.pdb
+*.dll
+*.exe
+
+# Rider 관련 파일 무시 (사용할 경우)
+.idea/
+*.sln.iml
+
+# NuGet 패키지 관련
+packages/
+*.nuget/
+
+# ReSharper 관련 파일 무시
+_ReSharper*/
+*.[Rr]e[Ss]harper
+resharper*.sln.DotSettings
+
+# Rider 관련 파일 무시
+.idea/
+
+# 테스트 결과 관련 파일 무시
+TestResults/
+*.trx
+*.coverage
+.coveragejson
+
+# 스타일 관련 파일 무시
+*.vsix
+*.code-workspace
+
+# 기타 임시 파일 무시
+[Tt]humbs.db
+[Dd]esktop.ini
+$_*
+
+# Windows 폴더 무시
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
