@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.ServiceProcess;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RawDataService {
@@ -22,12 +18,15 @@ namespace RawDataService {
 
         protected override void OnStart(string[] args) {
             Task.Run(async () => {
-                await SocketService.Start();
+                // await SocketService.Start();
 
                 observeService.AddObserver(5, @"C:\helloworld", (string targetPath, List<string> filePaths) => {
                     string tempFolder  = Path.GetTempPath();
                     string zipFileName = $"{Environment.UserName}_{DateTime.Now:yyyyMMddHHmmss}.zip";
                     string zipFilePath = Path.Combine(tempFolder, zipFileName);
+                    string systemName  = Environment.MachineName;
+                    string logonName   = Environment.UserName;
+                    string createdAt   = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                     using (var zipArchive = ZipFile.Open(zipFilePath, ZipArchiveMode.Create)) {
                         foreach (string filePath in filePaths) {
@@ -35,6 +34,8 @@ namespace RawDataService {
                             zipArchive.CreateEntryFromFile(filePath, relativePath);
                         }
                     }
+                   
+                    
                 });
             });
         }
@@ -72,6 +73,10 @@ namespace RawDataService {
             }
 
             return string.Join(Path.DirectorySeparatorChar.ToString(), relativeParts);
+        }
+
+        private async Task BufferedSendRawFile (string url, string sendFilePath, object metadata) {
+
         }
     }
 }
