@@ -13,7 +13,6 @@ namespace RawDataService {
 
         private Dictionary<string, ObserverInfo> observers = new Dictionary<string, ObserverInfo>();
 
-
         public string AddObserver (int seconds, string targetPath, ObserverHandler handler) {
             string observerId = Guid.NewGuid().ToString();
             var observerInfo  = new ObserverInfo(seconds, targetPath, handler, observerId);
@@ -21,14 +20,12 @@ namespace RawDataService {
             return observerId;
         }
 
-
         public void RemoveObserver (string observerId) {
             if (observers.TryGetValue(observerId, out var observerInfo)) {
                 observerInfo.Dispose();
                 observers.Remove(observerId);
             }
         }
-
 
         private class ObserverInfo : IDisposable {
             public string TargetPath { get; }
