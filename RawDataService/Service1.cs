@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Net.Http.Headers;
 using System.Net.Http;
 using System.ServiceProcess;
 using System.Threading.Tasks;
@@ -17,18 +16,17 @@ namespace RawDataService {
 
         public Service1() {
             InitializeComponent();
-
             Console.WriteLine("API_HOST=" + apiHost);
         }
 
         protected override void OnStart(string[] args) {
             observeService.AddObserver(5, @"C:\helloworld", (string targetPath, List<string> filePaths) => {
-                string tempFolder = Path.GetTempPath();
+                string tempFolder  = Path.GetTempPath();
                 string zipFileName = $"{Environment.UserName}_{DateTime.Now:yyyyMMddHHmmss}.zip";
                 string zipFilePath = Path.Combine(tempFolder, zipFileName);
-                string systemName = Environment.MachineName;
-                string logonName = Environment.UserName;
-                string createdAt = DateTime.Now.ToString("yyyy-MM-dd HH시 mm분 ss초");
+                string systemName  = Environment.MachineName;
+                string logonName   = Environment.UserName;
+                string createdAt   = DateTime.Now.ToString("yyyy-MM-dd HH시 mm분 ss초");
 
                 using (var zipArchive = ZipFile.Open(zipFilePath, ZipArchiveMode.Create)) {
                     foreach (string filePath in filePaths) {
@@ -37,7 +35,6 @@ namespace RawDataService {
                     }
                 }
 
-                Console.WriteLine("called BufferedSendRawFile");
                 BufferedSendRawFile(systemName, logonName, zipFilePath, createdAt);
             });
         }
